@@ -10,7 +10,7 @@ function getComputerChoice() {
 }
 console.log(getComputerChoice());
 
-function round(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
 
     switch(playerSelection) {
@@ -48,26 +48,13 @@ function round(playerSelection, computerSelection) {
                     return 'You lose! Scissors beats paper';
             }
     }   
-console.log(round('paper', getComputerChoice()));
+console.log(playRound('paper', getComputerChoice()));
 }
 
 function playGame() {
     let userScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let userChoice = prompt("Rock, paper or scissors?");
-        let computerChoice = getComputerChoice();
-        let roundResult = round(userChoice, computerChoice);
-        if (roundResult.charAt(4) == "w") {
-            userScore++;
-        } else if (roundResult.charAt(4) == "l") {
-            computerScore++;
-        } else {
-            continue;
-        }
-    }
-    console.log(userScore);
-    console.log(computerScore);
+
     if (userScore > computerScore) {
         console.log(`You win! By ${userScore} to ${computerScore}`)
     } else if (userScore < computerScore) {
