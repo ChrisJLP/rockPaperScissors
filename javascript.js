@@ -63,3 +63,10 @@ function playGame() {
         console.log(`It's a draw! ${userScore} to ${computerScore}`)
     }
 }
+
+const btns = document.querySelectorAll('button');
+btns.forEach((button) => {
+    button.addEventListener('click', () => {
+        console.log(playRound(button.textContent, getComputerChoice()));
+    });
+});
