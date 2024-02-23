@@ -17,56 +17,82 @@ function playRound(playerSelection, computerSelection) {
         case 'rock':
             switch(computerSelection) {
                 case 'rock':
-                    return 'Draw! Rock vs rock';
+                    return 'd';
                     break;
                 case 'paper':
-                    return 'You lose! Paper beats rock';
+                    return 'l';
                     break;
                 default: 
-                    return 'You win! Rock beats scissors';  
+                    return 'w';  
             }
         case 'scissors': 
             switch(computerSelection) {
                 case 'rock': 
-                    return 'You lose! Rock beats scissors';
+                    return 'l';
                     break;
                 case 'paper': 
-                    return 'You win! Scissors beats paper';
+                    return 'w';
                     break;
                 default: 
-                    return 'Draw! Scissors vs scissors';
+                    return 'd';
             }
         default: 
             switch(computerSelection) {
                 case 'rock': 
-                    return 'You win! Paper beats rock';
+                    return 'w';
                     break;
                 case 'paper': 
-                    return 'Draw! Paper vs paper';
+                    return 'd';
                     break;
                 default: 
-                    return 'You lose! Scissors beats paper';
+                    return 'l';
             }
     }   
 console.log(playRound('paper', getComputerChoice()));
 }
 
-function playGame() {
-    let userScore = 0;
-    let computerScore = 0;
-
-    if (userScore > computerScore) {
-        console.log(`You win! By ${userScore} to ${computerScore}`)
-    } else if (userScore < computerScore) {
-        console.log(`You lose! By ${computerScore} to ${userScore}`)
-    } else {
-        console.log(`It's a draw! ${userScore} to ${computerScore}`)
-    }
-}
+let userScore = 0;
+let computerScore = 0;
 
 const btns = document.querySelectorAll('button');
 btns.forEach((button) => {
     button.addEventListener('click', () => {
-        console.log(playRound(button.textContent, getComputerChoice()));
+        if (userScore < 5 && computerScore < 5) {
+            let result = playRound(button.textContent, getComputerChoice());
+            updateScores(result);
+            displayScores();
+            if (userScore == 5 || computerScore == 5) {
+                displayWinner();
+            }
+        } else {
+            displayWinner();
+        }
     });
 });
+
+function updateScores(result) {
+    if (result == "w") {
+        userScore++;
+    } else if (result == 'l') {
+        computerScore++;
+    } else {
+        return;
+    }
+}
+
+function displayScores() {
+    const displayUserScore = document.querySelector('.userScore');
+    displayUserScore.textContent = `User Score: ${userScore}`;
+    const displayComputerScore = document.querySelector('.computerScore');
+    displayComputerScore.textContent = `Computer Score: ${computerScore}`;
+}
+
+function displayWinner() {
+    if (userScore == 5) {
+        const displayWinner = document.querySelector('.winner');
+        displayWinner.textContent = `User is the winner! ${userScore} to ${computerScore}`;
+    } else {
+        const displayWinner = document.querySelector('.winner');
+        displayWinner.textContent = `Computer is the winner! ${computerScore} to ${userScore}`;
+    }
+}
