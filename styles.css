@@ -1,0 +1,20 @@
+.gameScores {
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.gameButtons {
+    display: flex;
+    gap: 7px;
+    margin-left: auto;
+    justify-content: center;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
